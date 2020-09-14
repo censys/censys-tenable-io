@@ -1,0 +1,19 @@
+---
+
+censys:
+  authentication:
+    asm_api_key: 
+
+
+  run:
+    - command: importNewLogbookHosts
+      interval: 120
+      startup: true
+      options:
+        idFrom: 
+        filter: 
+
+tenable_io:
+  tenable_access_key: 
+  tenable_secret_key: 
+  source: 'censys_asm_platform'

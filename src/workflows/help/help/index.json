@@ -1,0 +1,28 @@
+{
+	"Summary": 
+	[
+		"Help... I need somebody. HELP... Not just anybody.",
+		"Won't you please, pa-leeee-a-eese help me?!?!?!"
+	],
+
+	"Options":
+	[
+		{
+			"Workflow": "inspect",
+			"Description": "Retrieves Logbook data."
+		},
+		{
+			"Workflow": "logbook",
+			"Description": "Generates Logbook cursors."
+		}
+	],
+
+	"Footer":
+	[
+		"To see help for each workflow and task, use the --help option.",
+		"For example: logbook getData --help"
+	]
+
+}
+
+
