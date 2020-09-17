@@ -40,7 +40,7 @@ module.exports = async function importNewLogbookHosts(my){
     let ip = entity.map(i => i.ipAddress);
     ip = [... new Set(ip)];
 
-    const assets = ip.map( i => ({ipv4: [i.ipAddress]}) ); // convert ip array to tenable assets array
+    const assets = ip.map( i => ({ipv4: [i]}) ); // convert ip array to tenable assets array
 
     if (assets.length > 0){
         const tc = await tenableCloud.importAssets({
@@ -50,21 +50,18 @@ module.exports = async function importNewLogbookHosts(my){
 
       if( tc.success && (typeof dbLastId == 'number') ){
           await my.storage.put({lastId: dbLastId+1},'lastId.json', `tasks/${my.taskName}/input`);
+
+          // summarize results and output to console
+          console.log();
+          console.log('Summary');
+          console.log('-------')
+          console.log(`Total number of events: ${db.logbook.numOfRows()}`);
+          console.log(`Number of HOST, ASSOCIATE events: ${db.logbook.rowSet.numOfRows()}`);
+          console.log(`Number of IPs shipped to Tenable Cloud instance: ${assets.length}`);
+          console.log();
       }
 
     }
-
-    // summarize results and output to console
-    // console.log();
-    // console.log('Summary');
-    // console.log('-------')
-    // console.log(`Total number of events: ${db.logbook.numOfRows()}`);
-    // console.log(`Number of HOST, ASSOCIATE events: ${db.logbook.rowSet.numOfRows()}`);
-    // console.log(`Number of IPs shipped to Tenable Cloud instance: ${assets.length}`);
-    // console.log();
-      
-
   }
-
 }
 
