@@ -45,3 +45,9 @@ then
 	docker run --rm -d --network $network -v $host_storage:$container_storage $image
 	exit
 fi
+
+if [ "$1" == "cli" ]
+then
+	docker run -it --env CENSYS_RUN_ONCE=1 --network $network --rm -v $host_storage:$container_storage $image node cli.js
+	exit
+fi

@@ -1,0 +1,26 @@
+{
+	"Summary": 
+	[
+		"Import seeds from your Tenable.io instance into the Censys Attack Surface Management platform."
+	],
+
+	"Options":
+	[
+		{
+			"Option": "--seedsLabel",
+			"Value(s)": "",
+			"Default": "",
+			"req": "   ",
+			"Description": "The label for imported seeds."
+		}
+	],
+
+	"Footer":
+	[
+		"For support visit: https://support.censys.io",
+		"API docs can be found here: https://app.censys.io/api-docs"
+	]
+
+}
+
+

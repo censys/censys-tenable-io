@@ -1,6 +1,6 @@
 {
-  "name": "censys-splunk-hec",
-  "version": "1.0.0",
+  "name": "censys-tenable-io",
+  "version": "1.2.0",
   "description": "",
   "main": "docker.js",
   "scripts": {

@@ -35,4 +35,3 @@ Step 3: Build a container for the Censys Tenable.io Integration:
 
 ## Setup Details
 
-See the docs folder for setup details.

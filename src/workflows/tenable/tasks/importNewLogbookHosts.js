@@ -16,6 +16,10 @@ module.exports = async function importNewLogbookHosts(my){
     return
   }
 
+  if(idFrom == 0){ // limit the filter type to HOST when downloading the entire logbook since this may be very large
+    filter = {type: ['HOST']}
+  }
+
   let results = {};
   results = await censys.api.saas.getLogbookCursor( {filter: filter, idFrom: idFrom});
 
@@ -25,7 +29,7 @@ module.exports = async function importNewLogbookHosts(my){
 
 
   if (lb.success){
-
+console.log('success');
     db.logbook.import(lb.data);
 
     // get the last id retrieved

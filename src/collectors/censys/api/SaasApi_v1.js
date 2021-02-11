@@ -27,6 +27,26 @@ module.exports = class {
 
 		this.userAgent = `${userAgent}`;
 
+		this.getAssetsHosts = () => 
+			httpRequest(`${rootEndpoint}/assets/hosts`, {
+				method: 'GET',
+				headers: {...defaultHeaders},
+				cookies: cookies,
+				},
+				rateLimit
+			);
+
+		this.setAssetsHostsTag = (ip, tag, color='FFFFFF') => 
+			httpRequest(`${rootEndpoint}/assets/hosts/${ip}/tags`, {
+				method: 'POST',
+				headers: {...defaultHeaders},
+				cookies: cookies,
+				// payload: {name: `${tag}`, color: `${color}`},
+				payload: {name: `${tag}`},
+				},
+				rateLimit
+			);
+
 		this.getLogbookCursor = (payload = {filter:{}, idFrom: 0}) => 
 			httpRequest(`${rootEndpoint}/logbook-cursor`, {
 				method: 'POST',

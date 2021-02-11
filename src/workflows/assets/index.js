@@ -12,10 +12,12 @@ async function initialize(){
     this.db = new joreldb.Database(`${__dirname}/jorel/model`);
 
     const userAgent = _g.components.userAgent(this.name);
+    // this.censys = new this.collectors.censys( {...this.settings.censys.authentication, userAgent: userAgent} );
 
     this.censys = new this.collectors.censys( {
         ...this.settings.censys.authentication,
         userAgent: userAgent,
+        // saas: { rootEndpoint: rootEndpoint, cookies: cookies }
     });
     
     

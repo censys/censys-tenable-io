@@ -2,18 +2,27 @@
 
 censys:
   authentication:
-    asm_api_key: 
+  # Find this key on app.censys.io/admin
+    asm_api_key: your-censys-asm-api-key
 
 
   run:
     - command: importNewLogbookHosts
+      # Interval for command to run in minutes    
       interval: 120
+
+      # If true, runs immediately on startup, if false, waits for the interval set above      
       startup: true
+
       options:
+        # The event ID to begin pulling events from. Only used on initial startup
         idFrom: 
+        # Event types to pull from the logbook. If empty, all event types will be retrieved
         filter: 
 
+
+
 tenable_io:
-  tenable_access_key: 
-  tenable_secret_key: 
+  tenable_access_key: your-tenable-io-access-key
+  tenable_secret_key: your-tenable-io-secret-key
   source: 'censys_asm_platform'
