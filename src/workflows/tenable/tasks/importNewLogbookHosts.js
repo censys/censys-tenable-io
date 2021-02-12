@@ -29,7 +29,7 @@ module.exports = async function importNewLogbookHosts(my){
 
 
   if (lb.success){
-console.log('success');
+// console.log('success');
     db.logbook.import(lb.data);
 
     // get the last id retrieved

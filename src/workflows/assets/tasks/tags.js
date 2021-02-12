@@ -1,8 +1,11 @@
-// assetDetection.js
+// tags.js
 
 const {asTable} = _g.components;
 
-module.exports = async function tagAssets(my){
+module.exports = async function tags(my){
+
+  const apiBatch = my.argv.apiBatch ? my.argv.apiBatch : 1;
+  const apiDelay = my.argv.apiDelay ? my.argv.apiDelay : 500;
 
   const unmanagedTag = my.argv.unmanagedTag ? my.argv.unmanagedTag : '';
   const managedTag = my.argv.managedTag ? my.argv.managedTag : '';
@@ -33,31 +36,44 @@ module.exports = async function tagAssets(my){
 
   if(unmanagedTag){
     unmanagedArray = testMode ? unmanagedArray.slice(0,20) : unmanagedArray;
-    let pArray = [];
-    unmanagedArray.forEach(async (element) => {
-      pArray.push(my.censys.api.saas.setAssetsHostsTag(`${element}`, `${unmanagedTag}`));
+
+    for(let i = 0; i < unmanagedArray.length; i += apiBatch ){
+      ipsChunk = unmanagedArray.slice(i, i+apiBatch);
+
+      let pArray = [];
+      unmanagedArray.forEach(async (element) => {
+       pArray.push(my.censys.api.saas.setAssetsHostsTag(`${element}`, `${unmanagedTag}`));
   
-    });
-    await Promise.allSettled(pArray);
-    console.log(`${unmanagedArray.length} host(s) were tagged with ${unmanagedTag}.`);
+      });
+      await Promise.allSettled(pArray);
+      await sleep(apiDelay);
+    }
+
+    console.log(`${unmanagedArray.length} host(s) were tagged as unmanaged with ${unmanagedTag}.`);
 
   } else {
-      // console.log(`No updates were made to `)
+      console.log(`No host(s) were tagged as unmanaged because --unmanagedTag wasn't specified.`);
 
   }
   
   if(managedTag){
     managedArray = testMode ? managedArray.slice(0,20) : managedArray;
-    pArray = [];
-    managedArray.forEach(async (element) => {
-      pArray.push(my.censys.api.saas.setAssetsHostsTag(`${element}`, `${managedTag}`));
+
+    for(let i = 0; i < managedArray.length; i += apiBatch ){
+      ipsChunk = managedArray.slice(i, i+apiBatch);
+
+      pArray = [];
+      managedArray.forEach(async (element) => {
+        pArray.push(my.censys.api.saas.setAssetsHostsTag(`${element}`, `${managedTag}`));
   
-    });
-    await Promise.allSettled(pArray);
-    console.log(`${managedArray.length} host(s) were tagged with ${managedTag}.`);
+      });
+      await Promise.allSettled(pArray);
+      await sleep(apiDelay);
+    }
+      console.log(`${managedArray.length} host(s) were tagged as managed with ${managedTag}.`);
 
     } else {
-      // console.log(`No assets updated because no managed tag was specified.`)
+      console.log(`No host(s) were tagged as managed because --managedTag wasn't specified.`);
   
   }
 
@@ -68,6 +84,11 @@ module.exports = async function tagAssets(my){
 }
 
 
+function sleep(ms) {
+  return new Promise( resolve => {
+    setTimeout(resolve, ms);
+  })
+}
 
 
 
