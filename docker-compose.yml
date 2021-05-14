@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+
+  censys_connector:
+    container_name: censys_tenable
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    restart: "no"
+    entrypoint: ["./build.sh"]
