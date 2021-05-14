@@ -1,0 +1,14 @@
+---
+
+censys:
+  # Find this key on app.censys.io/admin
+  asm_api_key: XXXXXXXX-XXXX-XXXX-XXXXXXXXXXXX
+  options:
+      # Log verbosity. Options [ CRITICAL, ERROR, WARNING, INFO, DEBUG ]
+      log_level: INFO
+      # Interval for command to run in minutes. To run just once and exit, use -1
+      interval: 120
+tenable:
+  tenable_access_key: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+  tenable_secret_key: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+  host_source: 'censys_asm_platform'
